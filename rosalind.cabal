@@ -1,0 +1,47 @@
+Name:       rosalind
+Version:    0.0.1
+License:    MIT
+Author:     Fedor Gogolev <knsd@knsd.net>
+
+Stability:  Experimental
+Category:   API
+Build-type: Simple
+Synopsis:   Rosalind soulutions
+
+Cabal-version: >= 1.2
+Tested-with:   GHC==7.4.*
+
+Library
+  Exposed-modules: Rosalind
+
+  HS-source-dirs:  src
+  GHC-options:     -Wall -fwarn-unused-imports -fno-warn-orphans
+  Build-depends:   base             == 4.5.*
+                 , text             == 0.11.*
+                 , attoparsec       == 0.10.*
+                 , shakespeare-text == 1.0.*
+
+Executable rosalind1
+  Main-is:          Rosalind1.hs
+  HS-source-dirs:   src, bin
+  GHC-options:      -Wall -Werror -fwarn-unused-imports -fno-warn-orphans
+
+Executable rosalind2
+  Main-is:          Rosalind2.hs
+  HS-source-dirs:   src, bin
+  GHC-options:      -Wall -Werror -fwarn-unused-imports -fno-warn-orphans
+
+Executable rosalind3
+  Main-is:          Rosalind3.hs
+  HS-source-dirs:   src, bin
+  GHC-options:      -Wall -Werror -fwarn-unused-imports -fno-warn-orphans
+
+Executable rosalind4
+  Main-is:          Rosalind4.hs
+  HS-source-dirs:   src, bin
+  GHC-options:      -Wall -Werror -fwarn-unused-imports -fno-warn-orphans
+
+Executable rosalind5
+  Main-is:          Rosalind5.hs
+  HS-source-dirs:   src, bin
+  GHC-options:      -Wall -Werror -fwarn-unused-imports -fno-warn-orphans
