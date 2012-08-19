@@ -1,14 +1,14 @@
 module Rosalind.Dna.Parsers
     ( parseDnaBase
-    , parseDna
-    , parseDnaPair
+    , parseDnaBases
+    , parseDnaBasesPair
     ) where
 
 import Control.Applicative ((<$>), (<*>), (<|>))
 
 import Data.Attoparsec.Text (Parser, anyChar, endOfInput, endOfLine, manyTill)
 
-import Rosalind.Dna.Types (DnaBase(..), Dna(..))
+import Rosalind.Dna.Types (DnaBase(..))
 
 parseDnaBase :: Parser DnaBase
 parseDnaBase = do
@@ -19,9 +19,9 @@ parseDnaBase = do
         'T' -> return $ DnaBaseT
         r   -> fail $ "Invalid base: " ++ [r]
 
-parseDna :: Parser Dna
-parseDna = Dna <$> manyTill parseDnaBase (endOfInput <|> endOfLine)
+parseDnaBases :: Parser [DnaBase]
+parseDnaBases = manyTill parseDnaBase (endOfInput <|> endOfLine)
 
-parseDnaPair :: Parser (Dna, Dna)
-parseDnaPair = (,) <$> parseDna
-                   <*> parseDna
+parseDnaBasesPair :: Parser ([DnaBase], [DnaBase])
+parseDnaBasesPair = (,) <$> parseDnaBases
+                        <*> parseDnaBases

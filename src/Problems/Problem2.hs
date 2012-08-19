@@ -4,10 +4,10 @@ module Problems.Problem2 where
 
 import Data.Text (Text)
 
-import Rosalind (Dna(..), parseDna, complement, parseOnly, st)
+import Rosalind (parseDnaBases, complement, parseOnly, st)
 
 problem :: Text -> Text
-problem t = case parseOnly parseDna t of
+problem t = case parseOnly parseDnaBases t of
     Left err -> error $ "Invalid input. " ++ err
-    Right (Dna bases) -> let complemented = map complement $ reverse bases in
+    Right bases -> let complemented = map complement $ reverse bases in
         [st|#{complemented}|]

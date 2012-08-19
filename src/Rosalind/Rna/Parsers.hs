@@ -1,13 +1,13 @@
 module Rosalind.Rna.Parsers
     ( parseRnaBase
-    , parseRna
+    , parseRnaBases
     ) where
 
-import Control.Applicative ((<$>), (<|>))
+import Control.Applicative ((<|>))
 
 import Data.Attoparsec.Text (Parser, anyChar, endOfInput, endOfLine, manyTill)
 
-import Rosalind.Rna.Types (RnaBase(..), Rna(..))
+import Rosalind.Rna.Types (RnaBase(..))
 
 parseRnaBase :: Parser RnaBase
 parseRnaBase = do
@@ -18,5 +18,5 @@ parseRnaBase = do
         'U' -> return $ RnaBaseU
         r   -> fail $ "Invalid base: " ++ [r]
 
-parseRna :: Parser Rna
-parseRna = Rna <$> manyTill parseRnaBase (endOfInput <|> endOfLine)
+parseRnaBases :: Parser [RnaBase]
+parseRnaBases = manyTill parseRnaBase (endOfInput <|> endOfLine)
