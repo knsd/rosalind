@@ -1,5 +1,4 @@
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE ScopedTypeVariables #-}
 
 module Problems.Problem7 where
 
@@ -19,6 +18,6 @@ permutate n = go [1..n]
 problem :: Text -> Text
 problem t = case parseOnly decimal t of
     Left err -> error $ "Invalid input. " ++ err
-    Right (n :: Int) -> let permutations = permutate n in intercalate "\n" $
+    Right n -> let permutations = permutate n in intercalate "\n" $
         (:) (toText $ product [1..n])
           $ map (intercalate " " . map toText) permutations
