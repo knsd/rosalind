@@ -2,6 +2,7 @@ module Rosalind.Dna.Parsers
     ( parseDnaBase
     , parseDnaBases
     , parseDnaBasesPair
+    , parseDnaBasesList
     ) where
 
 import Control.Applicative ((<$>), (<*>), (<|>))
@@ -25,3 +26,6 @@ parseDnaBases = manyTill parseDnaBase (endOfInput <|> endOfLine)
 parseDnaBasesPair :: Parser ([DnaBase], [DnaBase])
 parseDnaBasesPair = (,) <$> parseDnaBases
                         <*> parseDnaBases
+
+parseDnaBasesList :: Parser [[DnaBase]]
+parseDnaBasesList = manyTill (manyTill parseDnaBase endOfLine) endOfInput

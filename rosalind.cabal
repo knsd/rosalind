@@ -46,6 +46,11 @@ Executable rosalind5
   HS-source-dirs:   src, bin
   GHC-options:      -Wall -Werror -fwarn-unused-imports -fno-warn-orphans
 
+Executable rosalind6
+  Main-is:          Rosalind6.hs
+  HS-source-dirs:   src, bin
+  GHC-options:      -Wall -Werror -fwarn-unused-imports -fno-warn-orphans
+
 Test-suite rosalind-tests
   Main-is:          Tests.hs
   Type:             exitcode-stdio-1.0
