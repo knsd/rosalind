@@ -3,13 +3,13 @@
 
 module Rosalind.Instances () where
 
-import Data.Monoid (mconcat)
+import Prelude hiding (concat)
 
-import Data.Text (intercalate, pack)
-import Text.Shakespeare.Text (ToText(toText))
+import Data.Text (intercalate, concat, pack)
 
 import Rosalind.Dna (DnaBase(..), DnaBaseConensus(..), DnaBaseMatrixProfile(..))
 import Rosalind.Rna (RnaBase(..))
+import Rosalind.Utils (ToText(toText))
 
 instance ToText DnaBase where
     toText DnaBaseA = "A"
@@ -24,10 +24,10 @@ instance ToText RnaBase where
     toText RnaBaseU = "U"
 
 instance ToText [DnaBase] where
-    toText = mconcat . map toText
+    toText = concat . map toText
 
 instance ToText [RnaBase] where
-    toText = mconcat . map toText
+    toText = concat . map toText
 
 instance ToText DnaBaseConensus where
     toText (DnaBaseConensus bases) = toText bases

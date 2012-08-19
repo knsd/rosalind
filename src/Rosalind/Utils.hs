@@ -1,11 +1,16 @@
 module Rosalind.Utils
-    ( st
+    ( ToText(toText)
     , parseOnly
     ) where
 
+import Data.Text (Text, pack)
 import Data.Attoparsec.Text (parseOnly)
-import Data.Text.Lazy.Builder.Int (decimal)
-import Text.Shakespeare.Text (ToText(toText), st)
+
+class ToText a where
+    toText :: a -> Text
+
+instance ToText Text where
+    toText = id
 
 instance ToText Int where
-    toText = decimal
+    toText = pack . show

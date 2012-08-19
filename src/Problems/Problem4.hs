@@ -1,4 +1,3 @@
-{-# LANGUAGE QuasiQuotes #-}
 {-# LANGUAGE OverloadedStrings #-}
 
 module Problems.Problem4 where
@@ -7,7 +6,7 @@ import Data.List (isPrefixOf, tails)
 
 import Data.Text (Text, intercalate)
 
-import Rosalind (parseDnaBasesPair, parseOnly, st)
+import Rosalind (parseDnaBasesPair, parseOnly, toText)
 
 problem :: Text -> Text
 problem t = case parseOnly parseDnaBasesPair t of
@@ -15,7 +14,7 @@ problem t = case parseOnly parseDnaBasesPair t of
     Right (dna, subdna) ->
         let indexes =  map snd $ filter (isPrefixOf subdna . fst) $
                 zip (tails dna) ints in
-                    intercalate " " $ map (\index -> [st|#{index}|]) indexes
+                    intercalate " " $ map toText indexes
   where
     ints :: [Int]
     ints = [1 ..]

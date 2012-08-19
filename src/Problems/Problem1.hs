@@ -1,12 +1,12 @@
-{-# LANGUAGE QuasiQuotes #-}
+{-# LANGUAGE OverloadedStrings #-}
 
 module Problems.Problem1 where
 
 import Control.Applicative ((<$>))
 
-import Data.Text (Text)
+import Data.Text (Text, intercalate)
 
-import Rosalind (RnaBase(..), parseRnaBases, st, parseOnly)
+import Rosalind (RnaBase(..), parseRnaBases, parseOnly, toText)
 
 countRnaBases :: [RnaBase] -> (Int, Int, Int, Int)
 countRnaBases = foldl foldFunc (0, 0, 0, 0)
@@ -19,4 +19,4 @@ countRnaBases = foldl foldFunc (0, 0, 0, 0)
 problem :: Text -> Text
 problem t = case countRnaBases <$> parseOnly parseRnaBases t of
     Left err -> error $ "Invalid input. " ++ err
-    Right (as, cs, gs, us) -> [st|#{as} #{cs} #{gs} #{us}|]
+    Right (as, cs, gs, us) -> intercalate " " $ map toText [as, cs, gs, us]
