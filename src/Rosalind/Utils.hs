@@ -1,4 +1,5 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE OverloadedStrings #-}
 
 module Rosalind.Utils
     ( Percentage
@@ -6,7 +7,7 @@ module Rosalind.Utils
     , parse
     ) where
 
-import Data.Text.Lazy (Text)
+import Data.Text.Lazy (Text, append)
 import Data.Text.Lazy.Builder (toLazyText)
 import Data.Text.Lazy.Builder.Int (decimal)
 import Data.Text.Lazy.Builder.RealFloat (FPFormat(Fixed), formatRealFloat)
@@ -26,7 +27,7 @@ instance ToText Int where
     toText = toLazyText . decimal
 
 instance ToText Percentage where
-    toText = toLazyText . formatRealFloat Fixed (Just 2)
+    toText i = append (toLazyText $ formatRealFloat Fixed (Just 2) i) "%"
 
 parse :: ATL.Parser a -> Text -> Either String a
 parse p t = case ATL.parse p t of

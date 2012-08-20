@@ -6,7 +6,7 @@ module Problems.Problem8 where
 import Data.Function (on)
 import Data.List (maximumBy)
 
-import Data.Text.Lazy (Text, intercalate, append)
+import Data.Text.Lazy (Text, intercalate)
 
 import Rosalind (Fasta(..), DnaBase(..), Percentage, parseFastasList, parse,
                  toText)
@@ -24,4 +24,4 @@ problem t = case parse parseFastasList t of
     Right fastas ->
         let (name, persentage) = maximumBy (compare `on` snd ) $
                 map (\Fasta {..} -> (fastaName, cgContent fastaBases)) fastas in
-                    intercalate "\n" [name, toText persentage `append` "%"]
+                    intercalate "\n" [name, toText persentage]
