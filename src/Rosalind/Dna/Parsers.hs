@@ -5,10 +5,9 @@ module Rosalind.Dna.Parsers
     , parseDnaBasesList
     ) where
 
-import Control.Applicative ((<$>), (<*>), (<|>))
+import Control.Applicative ((<$>), (<*>))
 
-import Data.Attoparsec.Text.Lazy (Parser, anyChar, endOfInput, endOfLine,
-                                  manyTill)
+import Data.Attoparsec.Text.Lazy (Parser, anyChar, endOfLine, manyTill, many1)
 
 import Rosalind.Dna.Types (DnaBase(..))
 
@@ -22,11 +21,11 @@ parseDnaBase = do
         r   -> fail $ "Invalid base: " ++ [r]
 
 parseDnaBases :: Parser [DnaBase]
-parseDnaBases = manyTill parseDnaBase (endOfInput <|> endOfLine)
+parseDnaBases = manyTill parseDnaBase endOfLine
 
 parseDnaBasesPair :: Parser ([DnaBase], [DnaBase])
 parseDnaBasesPair = (,) <$> parseDnaBases
                         <*> parseDnaBases
 
 parseDnaBasesList :: Parser [[DnaBase]]
-parseDnaBasesList = manyTill (manyTill parseDnaBase endOfLine) endOfInput
+parseDnaBasesList = many1 parseDnaBases

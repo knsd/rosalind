@@ -1,12 +1,20 @@
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+
 module Rosalind.Utils
-    ( ToText(toText)
+    ( Percentage
+    , ToText(toText)
     , parse
     ) where
 
 import Data.Text.Lazy (Text)
 import Data.Text.Lazy.Builder (toLazyText)
 import Data.Text.Lazy.Builder.Int (decimal)
+import Data.Text.Lazy.Builder.RealFloat (FPFormat(Fixed), formatRealFloat)
 import qualified Data.Attoparsec.Text.Lazy as ATL
+
+newtype Percentage = Percentage Float
+    deriving (Eq, Ord, Enum, Num, Real, RealFrac, Floating, Fractional,
+              RealFloat)
 
 class ToText a where
     toText :: a -> Text
@@ -16,6 +24,9 @@ instance ToText Text where
 
 instance ToText Int where
     toText = toLazyText . decimal
+
+instance ToText Percentage where
+    toText = toLazyText . formatRealFloat Fixed (Just 2)
 
 parse :: ATL.Parser a -> Text -> Either String a
 parse p t = case ATL.parse p t of

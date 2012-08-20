@@ -19,6 +19,7 @@ import qualified Problems.Problem4 as P4
 import qualified Problems.Problem5 as P5
 import qualified Problems.Problem6 as P6
 import qualified Problems.Problem7 as P7
+import qualified Problems.Problem8 as P8
 
 cases :: [(String, Text -> Text, [(String, ByteString, ByteString)])]
 cases = [ ("problem1", P1.problem,
@@ -67,6 +68,13 @@ cases = [ ("problem1", P1.problem,
             [ ( "1"
               , $(embedFile "tests/data/7-1.in")
               , $(embedFile "tests/data/7-1.out")
+              )
+            ]
+          )
+        , ("problem8", P8.problem,
+            [ ( "1"
+              , $(embedFile "tests/data/8-1.in")
+              , $(embedFile "tests/data/8-1.out")
               )
             ]
           )
