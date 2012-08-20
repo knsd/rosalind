@@ -3,7 +3,9 @@ module Rosalind.Utils
     , parse
     ) where
 
-import Data.Text.Lazy (Text, pack)
+import Data.Text.Lazy (Text)
+import Data.Text.Lazy.Builder (toLazyText)
+import Data.Text.Lazy.Builder.Int (decimal)
 import qualified Data.Attoparsec.Text.Lazy as ATL
 
 class ToText a where
@@ -13,7 +15,7 @@ instance ToText Text where
     toText = id
 
 instance ToText Int where
-    toText = pack . show
+    toText = toLazyText . decimal
 
 parse :: ATL.Parser a -> Text -> Either String a
 parse p t = case ATL.parse p t of
