@@ -3,9 +3,10 @@
 module Main where
 
 import Data.ByteString (ByteString)
+import Data.ByteString.Lazy (fromChunks)
 
-import Data.Text (Text)
-import Data.Text.Encoding (decodeUtf8)
+import Data.Text.Lazy (Text)
+import Data.Text.Lazy.Encoding (decodeUtf8)
 import Data.FileEmbed (embedFile)
 import Test.HUnit.Base ((@=?))
 import Test.Framework (testGroup, defaultMain)
@@ -76,5 +77,6 @@ main = defaultMain groups
   where
     groups = flip map cases $ \(pname, pfun, pcases) ->
         testGroup pname $ flip map pcases $ \(cname, bin, bout) ->
-            testCase cname $ let tin  = decodeUtf8 bin
-                                 tout = decodeUtf8 bout in tout @=? pfun tin
+            testCase cname $ let tin  = decodeUtf8 $ fromChunks [bin]
+                                 tout = decodeUtf8 $ fromChunks [bout] in
+                                     tout @=? pfun tin

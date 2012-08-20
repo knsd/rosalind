@@ -7,7 +7,8 @@ module Rosalind.Dna.Parsers
 
 import Control.Applicative ((<$>), (<*>), (<|>))
 
-import Data.Attoparsec.Text (Parser, anyChar, endOfInput, endOfLine, manyTill)
+import Data.Attoparsec.Text.Lazy (Parser, anyChar, endOfInput, endOfLine,
+                                  manyTill)
 
 import Rosalind.Dna.Types (DnaBase(..))
 

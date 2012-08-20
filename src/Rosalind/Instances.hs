@@ -5,7 +5,7 @@ module Rosalind.Instances () where
 
 import Prelude hiding (concat)
 
-import Data.Text (intercalate, concat, pack)
+import Data.Text.Lazy (intercalate, concat, pack)
 
 import Rosalind.Dna (DnaBase(..), DnaBaseConensus(..), DnaBaseMatrixProfile(..))
 import Rosalind.Rna (RnaBase(..))

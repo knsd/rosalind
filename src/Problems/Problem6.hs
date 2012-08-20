@@ -2,12 +2,12 @@
 
 module Problems.Problem6 where
 
-import Data.Text (Text, intercalate)
+import Data.Text.Lazy (Text, intercalate)
 import Rosalind (DnaBaseMatrix(..), dnaBaseMatrixProfile,
-                dnaBaseConcensus, parseDnaBasesList, parseOnly, toText)
+                dnaBaseConcensus, parseDnaBasesList, parse, toText)
 
 problem :: Text -> Text
-problem t = case parseOnly parseDnaBasesList t of
+problem t = case parse parseDnaBasesList t of
     Left err -> error $ "Invalid input. " ++ err
     Right dnaBases ->
         let matrix = DnaBaseMatrix dnaBases

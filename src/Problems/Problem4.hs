@@ -4,12 +4,12 @@ module Problems.Problem4 where
 
 import Data.List (isPrefixOf, tails)
 
-import Data.Text (Text, intercalate)
+import Data.Text.Lazy (Text, intercalate)
 
-import Rosalind (parseDnaBasesPair, parseOnly, toText)
+import Rosalind (parseDnaBasesPair, parse, toText)
 
 problem :: Text -> Text
-problem t = case parseOnly parseDnaBasesPair t of
+problem t = case parse parseDnaBasesPair t of
     Left err -> error $ "Invalid input. " ++ err
     Right (dna, subdna) ->
         let indexes =  map snd $ filter (isPrefixOf subdna . fst) $
