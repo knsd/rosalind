@@ -9,4 +9,3 @@ problem t = case parse parseDnaBasesPair t of
     Left err -> error $ "Invalid input. " ++ err
     Right (first, second) -> toText $
         length $ filter (\(a, b) -> a /= b) $ zip first second 
-            
