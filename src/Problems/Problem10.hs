@@ -6,12 +6,10 @@ import Rosalind (RnaBase, Codon(..), rnaTriplet2Codon, parseRnaBases, parse,
                  toText)
 
 rnaBasesToCodons :: [RnaBase] -> Maybe [Codon]
-rnaBasesToCodons [a, b, c]
-  | rnaTriplet2Codon (a, b, c) == CodonStop = Just []
-  | otherwise                               = Nothing
-rnaBasesToCodons (a:b:c:xs) = do
-    t <- rnaBasesToCodons xs
-    return $ rnaTriplet2Codon (a, b, c) : t
+rnaBasesToCodons (a:b:c:xs) = case (rnaTriplet2Codon (a, b, c), xs) of
+    (CodonStop, []) -> Just []
+    (codon, (_:_))  -> rnaBasesToCodons xs >>= \t -> return $ codon : t
+    _               -> Nothing
 rnaBasesToCodons _ = Nothing
 
 problem :: Text -> Text
